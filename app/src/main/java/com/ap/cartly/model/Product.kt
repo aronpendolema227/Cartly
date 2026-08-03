@@ -3,7 +3,7 @@ package com.ap.cartly.model
 data class Product(
     val id: String,
     val name: String,
-    val price: String,
+    val price: Double,
     private var stockDisponible: Int,
 
     // Informacion necesaria para la interfas
