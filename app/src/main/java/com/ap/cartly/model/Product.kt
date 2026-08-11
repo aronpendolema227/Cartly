@@ -10,7 +10,7 @@ data class Product(
     val category: String = "General",
     val description: String = "",
     val specifications: List<String> = emptyList(),
-    val imageResId: Int? = null
+    val imageUrl: String = ""
 ){
     val stock: Int
         get() = stockDisponible
