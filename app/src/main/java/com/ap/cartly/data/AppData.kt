@@ -71,7 +71,7 @@ object AppData {
                 "Unidad SSD de 512 GB",
                 "Pantalla Full HD"
             ),
-            imageUrl = "https://images.unsplash.com/photo-1538503529202-7a0e79cbb6f6?auto=format&fit=crop&w=900&q=80"
+            imageUrl = "https://images.unsplash.com/photo-1705508216613-be1715a31212?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P002",
@@ -113,7 +113,7 @@ object AppData {
             "Pantalla de 24 pulgadas",
             "Conexiones HDMI y DisplayPort"
             ),
-            imageUrl = "https://images.unsplash.com/photo-1501780392773-287d506245a5?auto=format&fit=crop&w=900&q=80"
+            imageUrl = "https://images.unsplash.com/photo-1605379399843-5870eea9b74e?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P005",
@@ -155,7 +155,7 @@ object AppData {
             "Tecnología SSD",
             "Interfaz SATA"
             ),
-            imageUrl = "https://images.unsplash.com/photo-1518547606470-00ac2ae882af?auto=format&fit=crop&w=900&q=80"
+            imageUrl = "https://images.unsplash.com/photo-1756836857559-4c8161fe07f3?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P008",
@@ -169,7 +169,7 @@ object AppData {
             "Conexión USB 3.0",
             "Diseño compacto"
             ),
-            imageUrl = "https://images.unsplash.com/photo-1585163218097-43d81b016202?auto=format&fit=crop&w=900&q=80"
+            imageUrl = "https://images.unsplash.com/photo-1477949331575-2763034b5fb5?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P009",
@@ -197,7 +197,7 @@ object AppData {
             "Altura ajustable",
             "Alimentación mediante USB"
             ),
-            imageUrl = "https://images.unsplash.com/photo-1658869402195-9f0ea192ecd5?auto=format&fit=crop&w=900&q=80"
+            imageUrl = "https://images.pexels.com/videos/34940301/cooling-pad-for-laptop-cooling-pad-with-led-lights-ergonomic-laptop-cooling-pad-gaming-laptop-34940301.jpeg?auto=compress&h=750&w=1260"
         )
     )
 }

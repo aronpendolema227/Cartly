@@ -33,10 +33,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ap.cartly.data.AppData
 import com.ap.cartly.model.Product
 import java.util.Locale
+
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil3.compose.AsyncImage
 
 @Composable
 fun CatalogScreen(
@@ -204,15 +207,17 @@ private fun ProductCard(
             Box(
                 modifier = Modifier
                     .size(92.dp)
+                    .clip(RoundedCornerShape(18.dp))
                     .background(
-                        color = obtenerColorCategoria(producto.category),
-                        shape = RoundedCornerShape(18.dp)
+                        color = obtenerColorCategoria(producto.category)
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = obtenerIconoProducto(producto.name),
-                    fontSize = 36.sp
+                AsyncImage(
+                    model = producto.imageUrl,
+                    contentDescription = producto.name,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -297,23 +302,7 @@ private fun ProductCard(
     }
 }
 
-private fun obtenerIconoProducto(
-    nombre: String
-): String {
-    return when {
-        nombre.contains("Laptop", ignoreCase = true) -> "💻"
-        nombre.contains("Mouse", ignoreCase = true) -> "🖱️"
-        nombre.contains("Teclado", ignoreCase = true) -> "⌨️"
-        nombre.contains("Monitor", ignoreCase = true) -> "🖥️"
-        nombre.contains("Audífonos", ignoreCase = true) -> "🎧"
-        nombre.contains("Cámara", ignoreCase = true) -> "📷"
-        nombre.contains("SSD", ignoreCase = true) -> "💾"
-        nombre.contains("USB", ignoreCase = true) -> "🔌"
-        nombre.contains("Parlante", ignoreCase = true) -> "🔊"
-        nombre.contains("Refrigerante", ignoreCase = true) -> "❄️"
-        else -> "🛒"
-    }
-}
+
 
 private fun obtenerColorCategoria(
     categoria: String
