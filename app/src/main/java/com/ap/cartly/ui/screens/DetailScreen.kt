@@ -31,6 +31,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ap.cartly.data.AppData
 import java.util.Locale
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil3.compose.AsyncImage
 
 @Composable
 fun DetailScreen(
@@ -87,17 +90,19 @@ fun DetailScreen(
                 .fillMaxWidth()
                 .height(240.dp)
                 .padding(top = 12.dp)
+                .clip(RoundedCornerShape(28.dp))
                 .background(
                     color = obtenerColorCategoriaDetalle(
                         producto.category
-                    ),
-                    shape = RoundedCornerShape(28.dp)
+                    )
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = obtenerIconoDetalle(producto.name),
-                fontSize = 92.sp
+            AsyncImage(
+                model = producto.imageUrl,
+                contentDescription = producto.name,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
         }
 
@@ -286,23 +291,7 @@ private fun ProductoNoEncontrado(
     }
 }
 
-private fun obtenerIconoDetalle(
-    nombre: String
-): String {
-    return when {
-        nombre.contains("Laptop", ignoreCase = true) -> "💻"
-        nombre.contains("Mouse", ignoreCase = true) -> "🖱️"
-        nombre.contains("Teclado", ignoreCase = true) -> "⌨️"
-        nombre.contains("Monitor", ignoreCase = true) -> "🖥️"
-        nombre.contains("Audífonos", ignoreCase = true) -> "🎧"
-        nombre.contains("Cámara", ignoreCase = true) -> "📷"
-        nombre.contains("SSD", ignoreCase = true) -> "💾"
-        nombre.contains("USB", ignoreCase = true) -> "🔌"
-        nombre.contains("Parlante", ignoreCase = true) -> "🔊"
-        nombre.contains("Refrigerante", ignoreCase = true) -> "❄️"
-        else -> "🛒"
-    }
-}
+
 
 private fun obtenerColorCategoriaDetalle(
     categoria: String
