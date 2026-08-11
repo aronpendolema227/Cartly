@@ -70,7 +70,8 @@ object AppData {
                 "16 GB de memoria RAM",
                 "Unidad SSD de 512 GB",
                 "Pantalla Full HD"
-            )
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1538503529202-7a0e79cbb6f6?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P002",
@@ -80,10 +81,11 @@ object AppData {
             category = "Accesorios",
             description = "Mouse ergonómico con conexión inalámbrica y diseño compacto.",
             specifications = listOf(
-                "Conexión inalámbrica",
-                "Sensor óptico",
-                "Diseño ergonómico"
-            )
+            "Conexión inalámbrica",
+            "Sensor óptico",
+            "Diseño ergonómico"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1647755814392-fd071a3fcb4b?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P003",
@@ -93,10 +95,11 @@ object AppData {
             category = "Accesorios",
             description = "Teclado de tamaño completo para trabajo, estudio y entretenimiento.",
             specifications = listOf(
-                "Distribución en español",
-                "Teclas multimedia",
-                "Conexión USB"
-            )
+            "Distribución en español",
+            "Teclas multimedia",
+            "Conexión USB"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1543271082-81b28dfc0551?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P004",
@@ -106,10 +109,11 @@ object AppData {
             category = "Computadoras",
             description = "Monitor de alta definición con una imagen clara y colores intensos.",
             specifications = listOf(
-                "Resolución Full HD",
-                "Pantalla de 24 pulgadas",
-                "Conexiones HDMI y DisplayPort"
-            )
+            "Resolución Full HD",
+            "Pantalla de 24 pulgadas",
+            "Conexiones HDMI y DisplayPort"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1501780392773-287d506245a5?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P005",
@@ -119,10 +123,11 @@ object AppData {
             category = "Audio",
             description = "Audífonos cómodos con sonido envolvente para música y videollamadas.",
             specifications = listOf(
-                "Micrófono incorporado",
-                "Sonido estéreo",
-                "Almohadillas acolchadas"
-            )
+            "Micrófono incorporado",
+            "Sonido estéreo",
+            "Almohadillas acolchadas"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1520170350707-b2da59970118?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P006",
@@ -132,10 +137,11 @@ object AppData {
             category = "Accesorios",
             description = "Cámara web de alta definición para reuniones, clases y transmisiones.",
             specifications = listOf(
-                "Resolución HD",
-                "Micrófono integrado",
-                "Conexión USB"
-            )
+            "Resolución HD",
+            "Micrófono integrado",
+            "Conexión USB"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1750975314977-374f2290db53?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P007",
@@ -145,10 +151,11 @@ object AppData {
             category = "Almacenamiento",
             description = "Unidad de almacenamiento rápida para mejorar el rendimiento del equipo.",
             specifications = listOf(
-                "Capacidad de 1 TB",
-                "Tecnología SSD",
-                "Interfaz SATA"
-            )
+            "Capacidad de 1 TB",
+            "Tecnología SSD",
+            "Interfaz SATA"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1518547606470-00ac2ae882af?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P008",
@@ -158,10 +165,11 @@ object AppData {
             category = "Almacenamiento",
             description = "Memoria portátil para guardar documentos, imágenes y archivos personales.",
             specifications = listOf(
-                "Capacidad de 128 GB",
-                "Conexión USB 3.0",
-                "Diseño compacto"
-            )
+            "Capacidad de 128 GB",
+            "Conexión USB 3.0",
+            "Diseño compacto"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1585163218097-43d81b016202?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P009",
@@ -171,10 +179,11 @@ object AppData {
             category = "Audio",
             description = "Parlante inalámbrico portátil con sonido claro y batería recargable.",
             specifications = listOf(
-                "Conexión Bluetooth",
-                "Batería recargable",
-                "Diseño portátil"
-            )
+            "Conexión Bluetooth",
+            "Batería recargable",
+            "Diseño portátil"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1548949974-5a40c9a4de55?auto=format&fit=crop&w=900&q=80"
         ),
         Product(
             id = "P010",
@@ -184,10 +193,11 @@ object AppData {
             category = "Accesorios",
             description = "Base diseñada para mejorar la ventilación y comodidad de una laptop.",
             specifications = listOf(
-                "Ventiladores integrados",
-                "Altura ajustable",
-                "Alimentación mediante USB"
-            )
+            "Ventiladores integrados",
+            "Altura ajustable",
+            "Alimentación mediante USB"
+            ),
+            imageUrl = "https://images.unsplash.com/photo-1658869402195-9f0ea192ecd5?auto=format&fit=crop&w=900&q=80"
         )
     )
 }
