@@ -34,6 +34,11 @@ import java.util.Locale
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 @Composable
 fun DetailScreen(
@@ -50,6 +55,14 @@ fun DetailScreen(
         )
 
         return
+    }
+
+    var cargandoImagen by remember(producto.imageUrl) {
+        mutableStateOf(true)
+    }
+
+    var errorImagen by remember(producto.imageUrl) {
+        mutableStateOf(false)
     }
 
     Column(
@@ -102,8 +115,35 @@ fun DetailScreen(
                 model = producto.imageUrl,
                 contentDescription = producto.name,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                onLoading = {
+                    cargandoImagen = true
+                    errorImagen = false
+                },
+                onSuccess = {
+                    cargandoImagen = false
+                    errorImagen = false
+                },
+                onError = {
+                    cargandoImagen = false
+                    errorImagen = true
+                }
             )
+
+            if (cargandoImagen) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(38.dp),
+                    strokeWidth = 3.dp
+                )
+            }
+
+            if (errorImagen) {
+                Text(
+                    text = "Sin imagen disponible",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
 
         Text(
