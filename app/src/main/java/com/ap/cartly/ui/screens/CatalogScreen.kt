@@ -40,6 +40,8 @@ import java.util.Locale
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.remember
 
 @Composable
 fun CatalogScreen(
@@ -189,6 +191,14 @@ private fun ProductCard(
     producto: Product,
     onClick: () -> Unit
 ) {
+    var cargandoImagen by remember(producto.imageUrl) {
+        mutableStateOf(true)
+    }
+
+    var errorImagen by remember(producto.imageUrl) {
+        mutableStateOf(false)
+    }
+
     Card(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
@@ -217,8 +227,35 @@ private fun ProductCard(
                     model = producto.imageUrl,
                     contentDescription = producto.name,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    onLoading = {
+                        cargandoImagen = true
+                        errorImagen = false
+                    },
+                    onSuccess = {
+                        cargandoImagen = false
+                        errorImagen = false
+                    },
+                    onError = {
+                        cargandoImagen = false
+                        errorImagen = true
+                    }
                 )
+
+                if (cargandoImagen) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(26.dp),
+                        strokeWidth = 2.dp
+                    )
+                }
+
+                if (errorImagen) {
+                    Text(
+                        text = "Sin imagen",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
 
             Column(
