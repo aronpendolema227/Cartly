@@ -33,32 +33,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.ap.cartly.data.AppData
 import com.ap.cartly.model.Product
 import java.util.Locale
-
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.remember
+import androidx.compose.material3.IconButton
 
 @Composable
 fun CatalogScreen(
+    products: List<Product>,
     onProductClick: (String) -> Unit,
-    onProfileClick: () -> Unit
+    onProfileClick: () -> Unit,
+    onFavoriteClick: (Product) -> Unit
 ) {
     var categoriaSeleccionada by rememberSaveable {
         mutableStateOf("Todos")
     }
 
     val productosFiltrados = if (categoriaSeleccionada == "Todos") {
-        AppData.productos
+        products
     } else {
-        AppData.productos.filter { producto ->
+        products.filter { producto ->
             producto.category == categoriaSeleccionada
         }
     }
+
+    val categorias = listOf("Todos") +
+            products
+                .map { producto -> producto.category }
+                .distinct()
 
     Column(
         modifier = Modifier
@@ -83,7 +89,7 @@ fun CatalogScreen(
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(AppData.categorias) { categoria ->
+            items(categorias) { categoria ->
                 FilterChip(
                     selected = categoriaSeleccionada == categoria,
                     onClick = {
@@ -142,6 +148,9 @@ fun CatalogScreen(
                     producto = producto,
                     onClick = {
                         onProductClick(producto.id)
+                    },
+                    onFavoriteClick = {
+                        onFavoriteClick(producto)
                     }
                 )
             }
@@ -189,7 +198,8 @@ private fun CatalogHeader(
 @Composable
 private fun ProductCard(
     producto: Product,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onFavoriteClick: () -> Unit
 ) {
     var cargandoImagen by remember(producto.imageUrl) {
         mutableStateOf(true)
@@ -263,12 +273,32 @@ private fun ProductCard(
                     .weight(1f)
                     .padding(start = 16.dp)
             ) {
-                Text(
-                    text = producto.category.uppercase(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = producto.category.uppercase(),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    IconButton(
+                        onClick = onFavoriteClick,
+                        modifier = Modifier.size(36.dp)
+                    ) {
+                        Text(
+                            text = if (producto.isFavorite) "♥" else "♡",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
 
                 Text(
                     text = producto.name,

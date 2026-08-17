@@ -10,12 +10,17 @@ import androidx.navigation.navArgument
 import com.ap.cartly.ui.screens.CatalogScreen
 import com.ap.cartly.ui.screens.DetailScreen
 import com.ap.cartly.ui.screens.ProfileScreen
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.ap.cartly.viewmodel.ProductViewModel
 
 @Composable
 fun CartlyNavigation(
+    productViewModel: ProductViewModel,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
+    val products by productViewModel.products.collectAsState()
 
     NavHost(
         navController = navController,
@@ -26,6 +31,7 @@ fun CartlyNavigation(
             route = CartlyRoutes.CATALOG
         ) {
             CatalogScreen(
+                products = products,
                 onProductClick = { productId ->
                     navController.navigate(
                         CartlyRoutes.detail(productId)
@@ -35,6 +41,9 @@ fun CartlyNavigation(
                     navController.navigate(
                         CartlyRoutes.PROFILE
                     )
+                },
+                onFavoriteClick = { product ->
+                    productViewModel.toggleFavorite(product)
                 }
             )
         }
