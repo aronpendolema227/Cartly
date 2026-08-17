@@ -60,12 +60,17 @@ fun CartlyNavigation(
             val productId = backStackEntry.arguments
                 ?.getString(CartlyRoutes.PRODUCT_ID)
 
+            val product = products.find { producto ->
+                producto.id == productId
+            }
+
             DetailScreen(
-                productId = productId,
+                product = product,
                 onBack = {
                     navController.popBackStack()
                 }
             )
+
         }
 
         composable(

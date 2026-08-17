@@ -29,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ap.cartly.data.AppData
 import java.util.Locale
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -39,15 +38,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.ap.cartly.model.Product
 
 @Composable
 fun DetailScreen(
-    productId: String?,
+    product: Product?,
     onBack: () -> Unit
 ) {
-    val producto = AppData.productos.find { producto ->
-        producto.id == productId
-    }
+    val producto = product
 
     if (producto == null) {
         ProductoNoEncontrado(
