@@ -13,14 +13,17 @@ import com.ap.cartly.ui.screens.ProfileScreen
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.ap.cartly.viewmodel.ProductViewModel
+import com.ap.cartly.viewmodel.UserViewModel
 
 @Composable
 fun CartlyNavigation(
     productViewModel: ProductViewModel,
+    userViewModel: UserViewModel,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
     val products by productViewModel.products.collectAsState()
+    val userProfile by userViewModel.userProfile.collectAsState()
 
     NavHost(
         navController = navController,
@@ -77,6 +80,10 @@ fun CartlyNavigation(
             route = CartlyRoutes.PROFILE
         ) {
             ProfileScreen(
+                user = userProfile,
+                onUpdateProfile = { updatedUser ->
+                    userViewModel.updateProfile(updatedUser)
+                },
                 onBack = {
                     navController.popBackStack()
                 }

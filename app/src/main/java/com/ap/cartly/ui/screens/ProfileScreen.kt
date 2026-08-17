@@ -30,14 +30,61 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ap.cartly.data.AppData
 import com.ap.cartly.model.MembershipLevel
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.ap.cartly.model.User
 
 @Composable
 fun ProfileScreen(
+    user: User?,
+    onUpdateProfile: (User) -> Unit,
     onBack: () -> Unit
 ) {
-    val usuario = AppData.usuarioActual
+    if (user == null) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+
+        return
+    }
+
+    val usuario = user
+
+    var editando by remember {
+        mutableStateOf(false)
+    }
+
+    var nombre by remember(
+        usuario.id,
+        usuario.name
+    ) {
+        mutableStateOf(usuario.name)
+    }
+
+    var correo by remember(
+        usuario.id,
+        usuario.email
+    ) {
+        mutableStateOf(usuario.email)
+    }
+
+    var membresia by remember(
+        usuario.id,
+        usuario.membershipLevel
+    ) {
+        mutableStateOf(usuario.membershipLevel)
+    }
 
     val coloresMembresia = obtenerColoresMembresia(
         usuario.membershipLevel
@@ -155,20 +202,132 @@ fun ProfileScreen(
         ProfileInfoCard(
             titulo = "Información personal"
         ) {
-            ProfileInfoRow(
-                etiqueta = "Nombre",
-                valor = usuario.name
-            )
+            if (!editando) {
+                ProfileInfoRow(
+                    etiqueta = "Nombre",
+                    valor = usuario.name
+                )
 
-            ProfileInfoRow(
-                etiqueta = "Correo electrónico",
-                valor = usuario.email
-            )
+                ProfileInfoRow(
+                    etiqueta = "Correo electrónico",
+                    valor = usuario.email
+                )
 
-            ProfileInfoRow(
-                etiqueta = "Identificador",
-                valor = usuario.id
-            )
+                ProfileInfoRow(
+                    etiqueta = "Identificador",
+                    valor = usuario.id
+                )
+
+                FilledTonalButton(
+                    onClick = {
+                        editando = true
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp)
+                ) {
+                    Text(
+                        text = "Editar perfil"
+                    )
+                }
+            } else {
+                OutlinedTextField(
+                    value = nombre,
+                    onValueChange = {
+                        nombre = it
+                    },
+                    label = {
+                        Text("Nombre")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+
+                OutlinedTextField(
+                    value = correo,
+                    onValueChange = {
+                        correo = it
+                    },
+                    label = {
+                        Text("Correo electrónico")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 12.dp),
+                    singleLine = true
+                )
+
+                Text(
+                    text = "Membresía",
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(
+                        top = 16.dp,
+                        bottom = 8.dp
+                    )
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    listOf(
+                        MembershipLevel.BASIC,
+                        MembershipLevel.SILVER,
+                        MembershipLevel.GOLD
+                    ).forEach { nivel ->
+                        FilterChip(
+                            selected = membresia == nivel,
+                            onClick = {
+                                membresia = nivel
+                            },
+                            label = {
+                                Text(
+                                    text = nivel.displayName
+                                )
+                            }
+                        )
+                    }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    TextButton(
+                        onClick = {
+                            nombre = usuario.name
+                            correo = usuario.email
+                            membresia = usuario.membershipLevel
+                            editando = false
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Cancelar")
+                    }
+
+                    FilledTonalButton(
+                        onClick = {
+                            onUpdateProfile(
+                                usuario.copy(
+                                    name = nombre.trim(),
+                                    email = correo.trim(),
+                                    membershipLevel = membresia
+                                )
+                            )
+
+                            editando = false
+                        },
+                        enabled = nombre.isNotBlank() &&
+                                correo.isNotBlank(),
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Guardar")
+                    }
+                }
+            }
         }
 
         ProfileInfoCard(

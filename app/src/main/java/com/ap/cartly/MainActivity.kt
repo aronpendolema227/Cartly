@@ -12,6 +12,7 @@ import com.ap.cartly.navigation.CartlyNavigation
 import com.ap.cartly.ui.theme.CartlyTheme
 import androidx.lifecycle.ViewModelProvider
 import com.ap.cartly.viewmodel.ProductViewModel
+import com.ap.cartly.viewmodel.UserViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -25,6 +26,11 @@ class MainActivity : ComponentActivity() {
             cartlyApplication.viewModelFactory
         )[ProductViewModel::class.java]
 
+        val userViewModel = ViewModelProvider(
+            this,
+            cartlyApplication.viewModelFactory
+        )[UserViewModel::class.java]
+
         enableEdgeToEdge()
 
         setContent {
@@ -35,6 +41,7 @@ class MainActivity : ComponentActivity() {
 
                     CartlyNavigation(
                         productViewModel = productViewModel,
+                        userViewModel = userViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
