@@ -39,6 +39,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.ap.cartly.model.User
+import androidx.compose.material3.Icon
+import androidx.compose.ui.res.painterResource
+import com.ap.cartly.R
 
 @Composable
 fun ProfileScreen(
@@ -107,8 +110,20 @@ fun ProfileScreen(
             TextButton(
                 onClick = onBack
             ) {
+                Icon(
+                    painter = painterResource(
+                        id = R.drawable.ic_arrowback
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+
+                Spacer(
+                    modifier = Modifier.size(6.dp)
+                )
+
                 Text(
-                    text = "‹ Regresar"
+                    text = "Regresar"
                 )
             }
 
@@ -226,6 +241,18 @@ fun ProfileScreen(
                         .fillMaxWidth()
                         .padding(top = 12.dp)
                 ) {
+                    Icon(
+                        painter = painterResource(
+                            id = R.drawable.ic_edit
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.size(19.dp)
+                    )
+
+                    Spacer(
+                        modifier = Modifier.size(8.dp)
+                    )
+
                     Text(
                         text = "Editar perfil"
                     )
@@ -305,6 +332,18 @@ fun ProfileScreen(
                         },
                         modifier = Modifier.weight(1f)
                     ) {
+                        Icon(
+                            painter = painterResource(
+                                id = R.drawable.ic_close
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+
+                        Spacer(
+                            modifier = Modifier.size(6.dp)
+                        )
+
                         Text("Cancelar")
                     }
 
@@ -324,6 +363,18 @@ fun ProfileScreen(
                                 correo.isNotBlank(),
                         modifier = Modifier.weight(1f)
                     ) {
+                        Icon(
+                            painter = painterResource(
+                                id = R.drawable.ic_checkcircle
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier.size(19.dp)
+                        )
+
+                        Spacer(
+                            modifier = Modifier.size(7.dp)
+                        )
+
                         Text("Guardar")
                     }
                 }
@@ -378,6 +429,18 @@ fun ProfileScreen(
                     bottom = 24.dp
                 )
         ) {
+            Icon(
+                painter = painterResource(
+                    id = R.drawable.ic_arrowback
+                ),
+                contentDescription = null,
+                modifier = Modifier.size(20.dp)
+            )
+
+            Spacer(
+                modifier = Modifier.size(8.dp)
+            )
+
             Text(
                 text = "Regresar al catálogo"
             )

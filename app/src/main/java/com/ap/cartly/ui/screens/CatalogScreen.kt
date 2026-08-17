@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -41,6 +40,9 @@ import coil3.compose.AsyncImage
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.remember
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.ui.res.painterResource
+import com.ap.cartly.R
 
 @Composable
 fun CatalogScreen(
@@ -292,10 +294,25 @@ private fun ProductCard(
                         onClick = onFavoriteClick,
                         modifier = Modifier.size(36.dp)
                     ) {
-                        Text(
-                            text = if (producto.isFavorite) "♥" else "♡",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.primary
+                        Icon(
+                            painter = painterResource(
+                                id = if (producto.isFavorite) {
+                                    R.drawable.ic_heartcheck
+                                } else {
+                                    R.drawable.ic_favorite
+                                }
+                            ),
+                            contentDescription = if (producto.isFavorite) {
+                                "Quitar de favoritos"
+                            } else {
+                                "Agregar a favoritos"
+                            },
+                            tint = if (producto.isFavorite) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                MaterialTheme.colorScheme.onSurfaceVariant
+                            },
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
@@ -358,11 +375,24 @@ private fun ProductCard(
                         modifier = Modifier.weight(1f)
                     )
 
-                    Text(
-                        text = "Ver detalle ›",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Ver detalle",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+
+                        Icon(
+                            painter = painterResource(
+                                id = R.drawable.ic_chevronright
+                            ),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
                 }
             }
         }

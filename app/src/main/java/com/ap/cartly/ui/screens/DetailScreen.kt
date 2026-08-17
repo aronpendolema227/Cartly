@@ -39,6 +39,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.ap.cartly.model.Product
+import androidx.compose.material3.Icon
+import androidx.compose.ui.res.painterResource
+import com.ap.cartly.R
 
 @Composable
 fun DetailScreen(
@@ -80,8 +83,20 @@ fun DetailScreen(
             TextButton(
                 onClick = onBack
             ) {
+                Icon(
+                    painter = painterResource(
+                        id = R.drawable.ic_arrowback
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
+                )
+
+                Spacer(
+                    modifier = Modifier.size(6.dp)
+                )
+
                 Text(
-                    text = "‹ Regresar"
+                    text = "Regresar"
                 )
             }
 
@@ -247,6 +262,18 @@ fun DetailScreen(
                     bottom = 24.dp
                 )
         ) {
+            Icon(
+                painter = painterResource(
+                    id = R.drawable.ic_arrowback
+                ),
+                contentDescription = null,
+                modifier = Modifier.size(20.dp)
+            )
+
+            Spacer(
+                modifier = Modifier.size(8.dp)
+            )
+
             Text(
                 text = "Regresar al catálogo"
             )
