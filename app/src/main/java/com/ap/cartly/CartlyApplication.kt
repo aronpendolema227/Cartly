@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import com.ap.cartly.viewmodel.CartlyViewModelFactory
 
 class CartlyApplication : Application() {
 
@@ -21,6 +22,13 @@ class CartlyApplication : Application() {
 
     val userRepository by lazy {
         UserRepository(database.userDao())
+    }
+
+    val viewModelFactory by lazy {
+        CartlyViewModelFactory(
+            productRepository = productRepository,
+            userRepository = userRepository
+        )
     }
 
     private val applicationScope =
